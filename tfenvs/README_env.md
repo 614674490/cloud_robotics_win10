@@ -1,7 +1,7 @@
 <!--
  * @Author: Ken Kaneki
  * @Date: 2021-07-20 18:56:15
- * @LastEditTime: 2021-07-21 13:32:53
+ * @LastEditTime: 2021-07-21 16:59:09
  * @Description: README
 -->
 # 环境配置
@@ -151,6 +151,10 @@ else:
 
 # 程序执行
 
+## **运行目的**
+
+- 对现有的[模型](..\DNN_models\RL_checkpoints\facenet_4action\model)进行评估并生成评估图
+
 ## 先进入tfpy38虚拟环境
 
 ## win10下运行linux命令
@@ -224,7 +228,10 @@ tf.disable_v2_behavior()    #禁用TensorFlow 2.x行为
 
 ## 运行代码
 
-### 模型训练脚本(可以不执行)
+### 模型训练脚本
+
+- 用于生成训练模型，可以不执行
+- 训练前前确认[训练参数配置](..\simulate_RL\rl_configs\FourAction_RL_configs.ini)
 
 ```sh
 sh
@@ -234,8 +241,10 @@ sh train_RL.sh
 
 - 结果存储文件夹：scratch_results
 
-### 评估图生成脚本(必须执行)
+### 评估图生成脚本
 
+- 用于对[模型](..\DNN_models\RL_checkpoints\facenet_4action\model)进行评估
+- 需要执行该程序生成评估图
 - recreate_submission_plot_RL_agent_pretrained.sh
 
 ```txt
