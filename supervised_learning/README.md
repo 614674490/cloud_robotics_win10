@@ -1,4 +1,10 @@
-This subdir is experimental. We wanted to:
+<!--
+ * @Author: Ken Kaneki
+ * @Date: 2021-07-05 13:10:57
+ * @LastEditTime: 2021-07-21 18:34:56
+ * @Description: README
+-->
+## This subdir is experimental. We wanted to:
 
 1. annotate data from the live videos we took
     1. take a video stream and run edge/cloud DNNs ON EVERY FRAME

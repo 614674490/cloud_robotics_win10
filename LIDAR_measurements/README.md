@@ -1,4 +1,10 @@
-plots for camera-ready
+<!--
+ * @Author: Ken Kaneki
+ * @Date: 2021-07-05 13:10:57
+ * @LastEditTime: 2021-07-21 18:33:09
+ * @Description: README
+-->
+## plots for camera-ready
 
 1. source vs receiver WHILE transmitting
 
@@ -20,22 +26,23 @@ plots for camera-ready
     - bw_lidar_source_with_receiver.txt
     - bw_lidar_receiver_lidar1.txt
     - bw_lidar_receiver_lidar2.txt
-    
-IDEAL PLOT:
-    - Left (bandwidth), Right (Hz)
-    - source
-    - 1 receiver
-    - 1 receiver with rviz
-    - 1 receiver with simul file download
-    - 2 receivers
 
-    bandwidth on right:
-        - Source
-        - 1 Receiver
-        - 1 Receiver + Heavy Background Traffic
-        - 2 Concurrent Sender/Receiver Pairs
+## IDEAL PLOT:
 
-velodyne datasheet: 8.6 Mbps
+- Left (bandwidth), Right (Hz)
+- source
+- 1 receiver
+- 1 receiver with rviz
+- 1 receiver with simul file download
+- 2 receivers
+
+- bandwidth on right:
+    - Source
+    - 1 Receiver
+    - 1 Receiver + Heavy Background Traffic
+    - 2 Concurrent Sender/Receiver Pairs
+
+## velodyne datasheet: 8.6 Mbps
 
     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6387135/
 
