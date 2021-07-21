@@ -1,0 +1,21 @@
+
+reward	RL	1.0
+reward	curr_cloud	2.038349886134104
+reward	curr_edge	1.833862838703239
+reward	pure_oracle	0.5200324321301759
+reward	random	3.133881620983269
+reward	threshold-0.5	1.7801415169689074
+
+cost	RL	1.0
+cost	curr_cloud	0.457598441345365
+cost	curr_edge	1.4150943396226414
+cost	pure_oracle	1.280904359141184
+cost	random	0.6449717943830159
+cost	threshold-0.5	0.7115786810972938
+
+loss	RL	1.0
+loss	curr_cloud	1.3856209150326797
+loss	curr_edge	0.24784313725490195
+loss	pure_oracle	inf
+loss	random	0.1509209744503862
+loss	threshold-0.5	0.3622782446311858

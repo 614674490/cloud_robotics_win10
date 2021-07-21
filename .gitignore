@@ -1,0 +1,9 @@
+*.pyc
+*.jpg
+*.png
+*.avi
+*.DS_Store
+*.pickle
+*.csv
+scratch_results*
+TODO.txt
