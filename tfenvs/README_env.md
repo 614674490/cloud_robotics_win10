@@ -1,7 +1,7 @@
 <!--
  * @Author: Ken Kaneki
  * @Date: 2021-07-20 18:56:15
- * @LastEditTime: 2021-07-21 16:59:09
+ * @LastEditTime: 2021-07-22 10:21:08
  * @Description: README
 -->
 # 环境配置
@@ -167,11 +167,11 @@ Legion@LAPTOP-G5IM3O9T MINGW64 /e/VSCode/Python/cloud_robotics/simulate_RL/FaceN
 $
 ```
 
-## 工作地址声明
+## win10工作地址声明
 
 ```sh
 Legion@LAPTOP-G5IM3O9T MINGW64 /e/VSCode/Python/cloud_robotics/simulate_RL/FaceNet_four_action_simulator
-$ export CLOUD_ROOT_DIR='E:\VSCode\Python\cloud_robotics'
+$ export CLOUD_ROOT_DIR='E:/VSCode/Python/cloud_robotics'
 ```
 
 - 每进一次git，就需要export
@@ -226,11 +226,11 @@ tf.disable_v2_behavior()    #禁用TensorFlow 2.x行为
 
 ------------------------------------------------
 
-## 运行代码
+## [simulate_RL](../simulate_RL)运行代码
 
 ### 模型训练脚本
 
-- 用于生成训练模型，可以不执行
+- [train_RL.sh](../simulate_RL\FaceNet_four_action_simulator\train_RL.sh)用于生成训练模型，可以不执行
 - 训练前前确认[训练参数配置](..\simulate_RL\rl_configs\FourAction_RL_configs.ini)
 
 ```sh
@@ -245,7 +245,7 @@ sh train_RL.sh
 
 - 用于对[模型](..\DNN_models\RL_checkpoints\facenet_4action\model)进行评估
 - 需要执行该程序生成评估图
-- recreate_submission_plot_RL_agent_pretrained.sh
+- [recreate_submission_plot_RL_agent_pretrained.sh](../simulate_RL\FaceNet_four_action_simulator\recreate_submission_plot_RL_agent_pretrained.sh)
 
 ```txt
 这个脚本是新的，存储路径在backup_key_results里面
@@ -255,7 +255,7 @@ sh train_RL.sh
 sh recreate_submission_plot_RL_agent_pretrained.sh
 ```
 
-- eval_pretrain_RL_FourAction_fnet.sh
+- [eval_pretrain_RL_FourAction_fnet.sh](../simulate_RL\FaceNet_four_action_simulator\eval_pretrain_RL_FourAction_fnet.sh)
 
 ```txt
 这个脚本是旧的，存储路径在scratch_results里面，和模型训练程序的输出路径在同一个目录下
@@ -271,29 +271,45 @@ sh eval_pretrain_RL_FourAction_fnet.sh
 
 ![执行顺序](./images/7.png)
 
-### EVALUATE A PRE-TRAINED RL AGENT on the new test traces and log the results
+### 1.EVALUATE A PRE-TRAINED RL AGENT on the new test traces and log the results
+
+- [evaluate_RL_offload_utils.py](../simulate_RL\rl_trainer\evaluate_RL_offload_utils.py)
 
 ```sh
 python evaluate_RL_offload_utils.py
 ```
 
-### run the baselines
+- 结果保存到[RL_results_df.csv](../backup_key_results\RL_results_df.csv)
+
+### 2.run the baselines
+
+- [FourAction_policy_rollouts.py](../simulate_RL\FaceNet_four_action_simulator\FourAction_policy_rollouts.py)
 
 ```sh
 python FourAction_policy_rollouts.py
 ```
 
-### plot a boxplot of all different controllers
+- 结果保存到[FourAction_FaceNet_baseline_data_facenet_4action](../backup_key_results\FourAction_FaceNet_baseline_data_facenet_4action)
+
+### 3.plot a boxplot of all different controllers
+
+- [pubQuality_boxplot_FourAction_env.py](../simulate_RL\FaceNet_four_action_simulator\pubQuality_boxplot_FourAction_env.py)
 
 ```sh
 python pubQuality_boxplot_FourAction_env.py
 ```
 
-### plot a pareto optimal covariance plot shown in paper
+- 结果保存到[boxplot_facenet_4action](../backup_key_results\boxplot_facenet_4action)
+
+### 4.plot a pareto optimal covariance plot shown in paper
+
+- [loss_cost_pareto_plot_ellipsoid.py](../simulate_RL\FaceNet_four_action_simulator\loss_cost_pareto_plot_ellipsoid.py)
 
 ```sh
 python loss_cost_pareto_plot_ellipsoid.py
 ```
+
+- 结果保存到[ELLIPSE_facenet_4action](../backup_key_results\ELLIPSE_facenet_4action)
 
 ------------------------------------------------
 
@@ -318,10 +334,11 @@ TEST_SEEDS="10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,2
 #TEST_SEEDS="10"
 ```
 
-## 文件夹地址格式错误
+## 路径错误
 
+- 路径字符串中不能出现'//'
 - 删除 recreate_submission_plot_RL_agent_pretrained.sh中多余的'/'
-- 将py文件中'/'换为'\\'
+- 修改[textfile_utils.py](..\utils\textfile_utils.py)中的remove_and_create_dir(path)函数
 
 ## 坐标修改(Heuristic Oracle)
 
@@ -622,6 +639,8 @@ def remove_and_create_dir(path):
 修改为
 
 ```py
+import string
+···
 def remove_and_create_dir(path):
     """ System call to rm -rf and then re-create a dir """
 
@@ -629,10 +648,11 @@ def remove_and_create_dir(path):
     print('attempting to delete ', dir, ' path ', path)
     if os.path.exists(path):
         print('dir or file had exit,remove and recreate')
-        os.system("rd/s/q " + path)#强制删除含有子目录、文件的目录
-        #os.system("rm -rf" + path)
-    #os.system("mkdir -p "+ path)
-    os.system("mkdir " + path)
+        os.system("rd/s/q " + path.replace('/','\\'))#Win10
+        #os.system("rm -rf" + path)#linux
+    #os.system("mkdir -p "+ path)#linux
+    print('create dir')
+    os.system("mkdir " + path.replace('/','\\'))#Win10
 ```
 
 - <font color=#0FF00 >**该问题已成功解决**</font>
@@ -643,6 +663,7 @@ def remove_and_create_dir(path):
 
 ```sh
 WARNING:tensorflow:From E:\envs\tfpy38\lib\site-packages\tensorflow\python\compat\v2_compat.py:96: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+
 non-resource variables are not supported in the long term
 
 WARNING:tensorflow:From E:\envs\tfpy38\lib\site-packages\tensorflow\python\util\dispatch.py:206: multinomial
@@ -650,11 +671,12 @@ WARNING:tensorflow:From E:\envs\tfpy38\lib\site-packages\tensorflow\python\util\
 
 MatplotlibDeprecationWarning: Support for setting the 'text.latex.preamble' or 'pgf.preamble' rcParam to a list of strings is deprecated since 3.3 and will be removed two minor releases later; set it to a single string instead.
   plt.rcParams['text.latex.preamble'] = [r'\boldmath']
-MatplotlibDeprecationWarning: Support for setting the 'text.latex.preamble' or 'pgf.preamble' rcParam to a list of strings is deprecated since 3.3 and will be removed two minor releases later; set it to a single string instead.
-  plt.rcParams['text.latex.preamble'] = [r'\boldmath']
+
 MatplotlibDeprecationWarning: Support for setting the 'text.latex.preamble' or 'pgf.preamble' rcParam to a list of strings is deprecated since 3.3 and will be removed two minor releases later; set it to a single string instead.
   plt.rcParams['text.latex.preamble'] = [r'\boldmath']
 
+MatplotlibDeprecationWarning: Support for setting the 'text.latex.preamble' or 'pgf.preamble' rcParam to a list of strings is deprecated since 3.3 and will be removed two minor releases later; set it to a single string instead.
+  plt.rcParams['text.latex.preamble'] = [r'\boldmath']
 ```
 
 - <font color=#90900 >除数为0->[pubQuality_boxplot_FourAction_env.py第87行](..\simulate_RL\FaceNet_four_action_simulator\pubQuality_boxplot_FourAction_env.py)(**未解决**)</FONT>
@@ -683,6 +705,12 @@ plt.legend()就是为了展示标签，前面函数中没有定义，自然无�
 
 ```sh
 findfont: Font family ['normal'] not found. Falling back to DejaVu Sans
+```
+
+- 长期不支持非资源变量(未解决)
+
+```sh
+non-resource variables are not supported in the long term
 ```
 
 ## 效果评估图

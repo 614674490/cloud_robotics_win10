@@ -20,7 +20,7 @@ except:
 CLOUD_ROOT_DIR=os.environ['CLOUD_ROOT_DIR']
 sys.path.append(CLOUD_ROOT_DIR)
 
-UTILS_DIR = CLOUD_ROOT_DIR + '\\utils\\'
+UTILS_DIR = CLOUD_ROOT_DIR + '/utils/'
 sys.path.append(UTILS_DIR)
 
 import matplotlib
@@ -81,12 +81,12 @@ if __name__ == '__main__':
     HUGE_NEGATIVE = -1000000
 
     if DATA_DELETE_MODE:
-        base_plot_dir = base_log_path + '\\ELLIPSE_' + prefix + '\\'
+        base_plot_dir = base_log_path + '/ELLIPSE_' + prefix + '/'
         remove_and_create_dir(base_plot_dir)
 
     # load the results from the RL runs and the baseline runs
-    RL_episode_csv_path = base_log_path + '\\RL_results_df.csv'
-    baseline_controller_episode_csv_path = base_log_path + '\\' + 'FourAction_FaceNet_baseline_data_' + prefix + '\\FourAction_episode_results.csv'
+    RL_episode_csv_path = base_log_path + '/RL_results_df.csv'
+    baseline_controller_episode_csv_path = base_log_path + '/' + 'FourAction_FaceNet_baseline_data_' + prefix + '/FourAction_episode_results.csv'
 
     # cat them into one big dataframe
     controller_rewards_df, _ = join_RL_baseline_controllers(RL_episode_csv_path = RL_episode_csv_path, baseline_controller_episode_csv_path = baseline_controller_episode_csv_path, RL_present = RL_present)
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     '''
 
     plt.legend(handles=handle_list)
-    plt.savefig(base_plot_dir + '\\scaled_ellipse_noshade.png')
+    plt.savefig(base_plot_dir + '/scaled_ellipse_noshade.png')
     plt.close()
 
     ## SCATTERPLOT  [NOT PRESENT IN PAPER]
@@ -277,5 +277,5 @@ if __name__ == '__main__':
     #ax.text(0.75, 0.1, 'Oracle', fontsize=15)
 
     #plt.legend(handles=handle_list)
-    #plt.savefig(base_plot_dir + '\\scatter_ellipse_noshade.png')
+    #plt.savefig(base_plot_dir + '/scatter_ellipse_noshade.png')
     #plt.close()

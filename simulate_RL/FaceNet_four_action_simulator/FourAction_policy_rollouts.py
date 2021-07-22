@@ -19,7 +19,7 @@ from gym.utils import seeding
 CLOUD_ROOT_DIR=os.environ['CLOUD_ROOT_DIR']
 sys.path.append(CLOUD_ROOT_DIR)
 
-UTILS_DIR = CLOUD_ROOT_DIR + '\\utils\\'
+UTILS_DIR = CLOUD_ROOT_DIR + '/utils/'
 sys.path.append(UTILS_DIR)
 
 from calculation_utils import *
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     base_results_dir = args.base_results_dir
 
-    base_data_dir = base_results_dir + '\\FourAction_FaceNet_baseline_data_' + prefix + '\\'
+    base_data_dir = base_results_dir + '/FourAction_FaceNet_baseline_data_' + prefix + '/'
 
     if DATA_DELETE_MODE:
         remove_and_create_dir(base_data_dir)
@@ -95,11 +95,11 @@ if __name__ == '__main__':
     # results_df.groupby('controller_name').mean()
     results_df = offloader_env.results_df
 
-    results_csv = base_data_dir + '\\FourAction_episode_results.csv'
+    results_csv = base_data_dir + '/FourAction_episode_results.csv'
 
     results_df.to_csv(results_csv)
 
-    controller_results_csv = base_data_dir + '\\FourAction_episode_summary_results.csv'
+    controller_results_csv = base_data_dir + '/FourAction_episode_summary_results.csv'
 
     controller_rewards_df = results_df_to_controller_rewards_df(results_df = results_df, controller_results_csv_fname = controller_results_csv)
 

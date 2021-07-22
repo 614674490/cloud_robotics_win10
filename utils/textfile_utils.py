@@ -7,6 +7,7 @@ import itertools
 import os
 import pickle
 import random
+import string
 import sys
 
 import matplotlib.pyplot as plt
@@ -107,10 +108,11 @@ def remove_and_create_dir(path):
     print('attempting to delete ', dir, ' path ', path)
     if os.path.exists(path):
         print('dir or file had exit,remove and recreate')
-        os.system("rd/s/q " + path)#强制删除含有子目录、文件的目录
-        #os.system("rm -rf" + path)
-    #os.system("mkdir -p "+ path)
-    os.system("mkdir " + path)
+        os.system("rd/s/q " + path.replace('/','\\'))#Win10
+        #os.system("rm -rf" + path)#linux
+    #os.system("mkdir -p "+ path)#linux
+    print('create dir')
+    os.system("mkdir " + path.replace('/','\\'))#Win10
 
 
 

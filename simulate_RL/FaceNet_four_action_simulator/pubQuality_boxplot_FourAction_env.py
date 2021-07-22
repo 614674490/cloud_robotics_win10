@@ -20,7 +20,7 @@ except:
 CLOUD_ROOT_DIR=os.environ['CLOUD_ROOT_DIR']
 sys.path.append(CLOUD_ROOT_DIR)
 
-UTILS_DIR = CLOUD_ROOT_DIR + '\\utils\\'
+UTILS_DIR = CLOUD_ROOT_DIR + '/utils/'
 sys.path.append(UTILS_DIR)
 
 from plotting_utils import *
@@ -50,12 +50,12 @@ if __name__ == '__main__':
     HUGE_NEGATIVE = -1000000
 
     if DATA_DELETE_MODE:
-        base_plot_dir = base_log_path + '\\boxplot_' + prefix + '\\'
+        base_plot_dir = base_log_path + '/boxplot_' + prefix + '/'
         remove_and_create_dir(base_plot_dir)
 
     # load the results from the RL runs and the baseline runs
-    RL_episode_csv_path = base_log_path + '\\RL_results_df.csv'
-    baseline_controller_episode_csv_path = base_log_path + '\\' + 'FourAction_FaceNet_baseline_data_' + prefix + '\\FourAction_episode_results.csv'
+    RL_episode_csv_path = base_log_path + '/RL_results_df.csv'
+    baseline_controller_episode_csv_path = base_log_path + '/' + 'FourAction_FaceNet_baseline_data_' + prefix + '/FourAction_episode_results.csv'
 
     # cat them into one big dataframe
     controller_rewards_df, _ = join_RL_baseline_controllers(RL_episode_csv_path = RL_episode_csv_path, baseline_controller_episode_csv_path = baseline_controller_episode_csv_path, RL_present = RL_present)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 
     # write median rewards, cost, accuracy loss to a file
     ############################
-    out_file = base_plot_dir + '\\fold.results.txt'
+    out_file = base_plot_dir + '/fold.results.txt'
 
     metrics_list = ['reward', 'cost', 'loss']
     metric_dict_list = [dict(median_reward_df), dict(median_cost_df), dict(median_loss_df)]
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         ## baseline results
         ########################################################
         x_var = 'Offload Policy'
-        plot_fname = base_plot_dir + '\\FourAction_baseline_' + str(i) + '.png'
+        plot_fname = base_plot_dir + '/FourAction_baseline_' + str(i) + '.png'
         title_str = ' '
 
         order_list = ['random'] + actions + threshold_controller_list + ['pure_oracle']
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         ## RL
         ########################################################
         if 'RL' in controller_names_list:
-            plot_fname = base_plot_dir + '\\RL_' + str(i) + '.png'
+            plot_fname = base_plot_dir + '/RL_' + str(i) + '.png'
             order_list = ['random'] + actions + threshold_controller_list + ['RL', 'pure_oracle']
             latex_order_list = [remap_name_dict[x] for x in order_list]
 

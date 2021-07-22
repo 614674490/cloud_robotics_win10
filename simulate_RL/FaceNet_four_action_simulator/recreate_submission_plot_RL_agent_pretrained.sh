@@ -2,29 +2,29 @@
 ###
  # @Author: Ken Kaneki
  # @Date: 2021-07-05 13:10:57
- # @LastEditTime: 2021-07-20 19:20:06
+ # @LastEditTime: 2021-07-22 09:20:35
  # @Description: README
 ###
 
 # where code to train RL agent is
-RL_TRAINER_DIR=$CLOUD_ROOT_DIR\\simulate_RL\\rl_trainer
+RL_TRAINER_DIR=$CLOUD_ROOT_DIR/simulate_RL/rl_trainer
 
 # where simulator for offloading is
-BASE_4ACTION_DIR=$CLOUD_ROOT_DIR\\simulate_RL\\FaceNet_four_action_simulator
+BASE_4ACTION_DIR=$CLOUD_ROOT_DIR/simulate_RL/FaceNet_four_action_simulator
 
 # what do we call the run of interest? [change this as we change simulation params]
 PREFIX=facenet_4action
 
-CONFIG=$CLOUD_ROOT_DIR\\simulate_RL\\rl_configs\\FourAction_RL_configs.ini
+CONFIG=$CLOUD_ROOT_DIR/simulate_RL/rl_configs/FourAction_RL_configs.ini
 
 # where did we save the model checkpoint and parameters?
 ###############
-#MODEL_SAVE_PATH=$CLOUD_ROOT_DIR\\DNN_models\\RL_checkpoints\\train_RL_${PREFIX}\\model\\
-MODEL_SAVE_PATH=$CLOUD_ROOT_DIR\\DNN_models\\RL_checkpoints\\${PREFIX}\\model\\
+#MODEL_SAVE_PATH=$CLOUD_ROOT_DI/DNN_models/RL_checkpoints/train_RL_${PREFIX}/model/
+MODEL_SAVE_PATH=$CLOUD_ROOT_DIR/DNN_models/RL_checkpoints/${PREFIX}/model/
 echo $MODEL_SAVE_PATH
 
 # where all logs and outputs go
-LOG_PATH=$CLOUD_ROOT_DIR\\backup_key_results
+LOG_PATH=$CLOUD_ROOT_DIR/backup_key_results
 #rm -rf $LOG_PATH
 #mkdir -p $LOG_PATH
 
@@ -48,14 +48,14 @@ TEST_SEEDS="10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,2
 #TEST_SEEDS="10"
 
 # 1. EVALUATE A PRE-TRAINED RL AGENT on the new test traces and log the results
-python $RL_TRAINER_DIR\\evaluate_RL_offload_utils.py --config-path $CONFIG --test-seeds $TEST_SEEDS --env-name $ENV_NAME --log-path $LOG_PATH --model-save-path $MODEL_SAVE_PATH --query-budget-fraction-list $QUERY_LIST
+python $RL_TRAINER_DIR/evaluate_RL_offload_utils.py --config-path $CONFIG --test-seeds $TEST_SEEDS --env-name $ENV_NAME --log-path $LOG_PATH --model-save-path $MODEL_SAVE_PATH --query-budget-fraction-list $QUERY_LIST
 
 # run the baselines
-python $BASE_4ACTION_DIR\\FourAction_policy_rollouts.py --prefix $PREFIX --test-seeds $TEST_SEEDS --query-budget-fraction-list $QUERY_LIST --base-results-dir $LOG_PATH
+python $BASE_4ACTION_DIR/FourAction_policy_rollouts.py --prefix $PREFIX --test-seeds $TEST_SEEDS --query-budget-fraction-list $QUERY_LIST --base-results-dir $LOG_PATH
 
 # plot a boxplot of all different controllers
-python $BASE_4ACTION_DIR\\pubQuality_boxplot_FourAction_env.py --prefix $PREFIX --RL_present 'both' --base-results-dir $LOG_PATH
+python $BASE_4ACTION_DIR/pubQuality_boxplot_FourAction_env.py --prefix $PREFIX --RL_present 'both' --base-results-dir $LOG_PATH
 
 # plot a pareto optimal covariance plot shown in paper
-python $BASE_4ACTION_DIR\\loss_cost_pareto_plot_ellipsoid.py --prefix $PREFIX --RL_present 'both' --base-results-dir $LOG_PATH
+python $BASE_4ACTION_DIR/loss_cost_pareto_plot_ellipsoid.py --prefix $PREFIX --RL_present 'both' --base-results-dir $LOG_PATH
 

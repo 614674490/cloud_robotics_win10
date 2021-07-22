@@ -19,16 +19,16 @@ from utils import (GlobalCounter, init_model_summary, init_out_dir,
                    signal_handler)
 
 CLOUD_ROOT_DIR = os.environ['CLOUD_ROOT_DIR']
-#sys.path.append(CLOUD_ROOT_DIR + '\\always_query_edge_simulator')
+#sys.path.append(CLOUD_ROOT_DIR + '/always_query_edge_simulator')
 #from always_query_edge_simulator import AlwaysQueryEdgeOffloadEnv
 #from stochastic_simulator.stochastic_video_offload_env import StochasticInputOffloadEnv
 
-sys.path.append(CLOUD_ROOT_DIR + '\\simulate_RL\\FaceNet_four_action_simulator')
+sys.path.append(CLOUD_ROOT_DIR + '/simulate_RL/FaceNet_four_action_simulator')
 from four_action_simulator_v1_fnet import FourActionOffloadEnv
 
 
 def parse_args():
-    default_config_path = os.path.join(CLOUD_ROOT_DIR, 'rl_configs\\test.ini')
+    default_config_path = os.path.join(CLOUD_ROOT_DIR, 'rl_configs/test.ini')
     parser = argparse.ArgumentParser()
     parser.add_argument('--config-path', type=str, required=False,
                         default=default_config_path, help="config path")
@@ -78,7 +78,7 @@ def RL_offload_evaluate(parser = None, test_seeds = None, algo = None, env_name 
     # optional
     #data = env._output_result()
     #if data is not None:
-    #    data.to_csv(log_path + '\\evaluate_result.csv')
+    #    data.to_csv(log_path + '/evaluate_result.csv')
 
 
 class RLOffloadEvaluator:
@@ -139,8 +139,8 @@ class RLOffloadEvaluator:
         print('total reward mean: %.2f, std: %.2f' %
               (np.mean(total_rewards), np.std(total_rewards)))
         #df = pd.DataFrame(self.data)
-        #df.to_csv(self.log_path + '\\evaluation_mdp.csv')
-        self.env.results_df.to_csv(self.log_path + '\\RL_results_df.csv')
+        #df.to_csv(self.log_path + '/evaluation_mdp.csv')
+        self.env.results_df.to_csv(self.log_path + '/RL_results_df.csv')
 
 
 if __name__ == '__main__':
