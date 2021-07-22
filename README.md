@@ -10,6 +10,7 @@
 - <font color=#FF000>**请先阅读[环境配置及运行说明文档](./tfenvs/README_env.md)**</font>
 - **本程序目前可以在win10和linux下两种系统中运行，但其余的环境配置方法不同，上述说明文档仅给出了win10下相关环境的配置方法**
 - **由于文件大小限制，评估所产生的csv结果文件(.\backup_key_results\RL_results_df.csv和.\backup_key_results\FourAction_FaceNet_baseline_data_facenet_4action\FourAction_episode_results.csv)无法上传，可以自己运行[评估脚本](./simulate_RL/FaceNet_four_action_simulator/recreate_submission_plot_RL_agent_pretrained.sh)重新生成**
+- 上述无法上传的csv已通过上传压缩包方式解决，下载后自行解压
 
 ```txt
 A deep reinforcement learning approach to cloud robotics.
