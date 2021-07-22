@@ -6,6 +6,7 @@ import copy
 import itertools
 import os
 import pickle
+import platform
 import random
 import string
 import sys
@@ -105,14 +106,19 @@ def remove_and_create_dir(path):
     """ System call to rm -rf and then re-create a dir """
 
     dir = os.path.dirname(path)
+    sys=platform.system()
     print('attempting to delete ', dir, ' path ', path)
     if os.path.exists(path):
         print('dir or file had exit,remove and recreate')
-        os.system("rd/s/q " + path.replace('/','\\'))#Win10
-        #os.system("rm -rf" + path)#linux
-    #os.system("mkdir -p "+ path)#linux
+        if sys == "Windows":
+            os.system("rd/s/q " + path.replace('/','\\'))#Win10
+        else:
+            os.system("rm -rf" + path)#linux
     print('create dir')
-    os.system("mkdir " + path.replace('/','\\'))#Win10
+    if sys == "Windows":
+        os.system("md " + path.replace('/','\\'))#Win10
+    else:
+        os.system("mkdir -p "+ path)#linux
 
 
 

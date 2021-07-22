@@ -1,7 +1,7 @@
 <!--
  * @Author: Ken Kaneki
  * @Date: 2021-07-20 18:56:15
- * @LastEditTime: 2021-07-22 10:21:08
+ * @LastEditTime: 2021-07-22 10:50:14
  * @Description: README
 -->
 # 环境配置
@@ -616,11 +616,6 @@ findfont: Font family ['normal'] not found. Falling back to DejaVu Sans.
 attempting to delete  E:\VSCode\Python\cloud_robotics\backup_key_results\boxplot_facenet_4action  path  E:\VSCode\Python\cloud_robotics\backup_key_results\boxplot_facenet_4action\
 子目录或文件 -p 已经存在。
 处理: -p 时出错。
-
-attempting to delete  E:\VSCode\Python\cloud_robotics\backup_key_results\ELLIPSE_facenet_4action  path  E:\VSCode\Python\cloud_robotics\backup_key_results\ELLIPSE_facenet_4action\
-子目录或文件 -p 已经存在。
-处理: -p 时出错。
-
 ```
 
 - 解决方法，修改[textfile_utils.py](..\utils\textfile_utils.py)
@@ -640,19 +635,25 @@ def remove_and_create_dir(path):
 
 ```py
 import string
+import platform
 ···
 def remove_and_create_dir(path):
     """ System call to rm -rf and then re-create a dir """
 
     dir = os.path.dirname(path)
+    sys=platform.system()
     print('attempting to delete ', dir, ' path ', path)
     if os.path.exists(path):
         print('dir or file had exit,remove and recreate')
-        os.system("rd/s/q " + path.replace('/','\\'))#Win10
-        #os.system("rm -rf" + path)#linux
-    #os.system("mkdir -p "+ path)#linux
+        if sys == "Windows":
+            os.system("rd/s/q " + path.replace('/','\\'))#Win10
+        else:
+            os.system("rm -rf" + path)#linux
     print('create dir')
-    os.system("mkdir " + path.replace('/','\\'))#Win10
+    if sys == "Windows":
+        os.system("md " + path.replace('/','\\'))#Win10
+    else:
+        os.system("mkdir -p "+ path)#linux
 ```
 
 - <font color=#0FF00 >**该问题已成功解决**</font>
