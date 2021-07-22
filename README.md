@@ -7,7 +7,7 @@
 
 # cloud_robotics
 
-- <font color=#FF000>**请先阅读[环境配置及运行说明文档](./tfenvs\README_env.md)**</font>
+- <font color=#FF000>**请先阅读[环境配置及运行说明文档](./tfenvs/README_env.md)**</font>
 - **本程序目前可以在win10和linux下两种系统中运行，但其余的环境配置方法不同，上述说明文档仅给出了win10下相关环境的配置方法**
 
 ```txt

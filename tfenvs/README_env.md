@@ -1,7 +1,7 @@
 <!--
  * @Author: Ken Kaneki
  * @Date: 2021-07-20 18:56:15
- * @LastEditTime: 2021-07-22 10:50:14
+ * @LastEditTime: 2021-07-22 10:59:36
  * @Description: README
 -->
 # 环境配置
@@ -92,13 +92,6 @@ pip 21.1.3 from E:\envs\tfpy38\lib\site-packages\pip (python 3.8)
 '2.5.0'
 ```
 
-- TensorFlow找不到cudart64_110.dll not found的解决方案
-dlerror: cudart64_110.dll not found
-[cudart64_110.dll](https://www.dll-files.com/cudart64_110.dll.html)
-- 如缺少其他[dll](https://www.dll-files.com/c/)文件可自己下载
-下载完之后，需要把改文件解压，然后将cudart64_110.dll放在文件夹下C:\Windows\System32
-- 一般情况下，出现上述错误是因为没有安装cuda和cuDNN
-
 ------------------------------------------------
 
 ### VS Code配置Anaconda
@@ -153,7 +146,7 @@ else:
 
 ## **运行目的**
 
-- 对现有的[模型](..\DNN_models\RL_checkpoints\facenet_4action\model)进行评估并生成评估图
+- 对现有的[模型](../DNN_models/RL_checkpoints/facenet_4action/model)进行评估并生成评估图
 
 ## 先进入tfpy38虚拟环境
 
@@ -230,8 +223,8 @@ tf.disable_v2_behavior()    #禁用TensorFlow 2.x行为
 
 ### 模型训练脚本
 
-- [train_RL.sh](../simulate_RL\FaceNet_four_action_simulator\train_RL.sh)用于生成训练模型，可以不执行
-- 训练前前确认[训练参数配置](..\simulate_RL\rl_configs\FourAction_RL_configs.ini)
+- [train_RL.sh](../simulate_RL/FaceNet_four_action_simulator/train_RL.sh)用于生成训练模型，可以不执行
+- 训练前前确认[训练参数配置](../simulate_RL/rl_configs/FourAction_RL_configs.ini)
 
 ```sh
 sh
@@ -243,9 +236,9 @@ sh train_RL.sh
 
 ### 评估图生成脚本
 
-- 用于对[模型](..\DNN_models\RL_checkpoints\facenet_4action\model)进行评估
+- 用于对[模型](../DNN_models/RL_checkpoints/facenet_4action/model)进行评估
 - 需要执行该程序生成评估图
-- [recreate_submission_plot_RL_agent_pretrained.sh](../simulate_RL\FaceNet_four_action_simulator\recreate_submission_plot_RL_agent_pretrained.sh)
+- [recreate_submission_plot_RL_agent_pretrained.sh](../simulate_RL/FaceNet_four_action_simulator/recreate_submission_plot_RL_agent_pretrained.sh)
 
 ```txt
 这个脚本是新的，存储路径在backup_key_results里面
@@ -255,7 +248,7 @@ sh train_RL.sh
 sh recreate_submission_plot_RL_agent_pretrained.sh
 ```
 
-- [eval_pretrain_RL_FourAction_fnet.sh](../simulate_RL\FaceNet_four_action_simulator\eval_pretrain_RL_FourAction_fnet.sh)
+- [eval_pretrain_RL_FourAction_fnet.sh](../simulate_RL/FaceNet_four_action_simulator/eval_pretrain_RL_FourAction_fnet.sh)
 
 ```txt
 这个脚本是旧的，存储路径在scratch_results里面，和模型训练程序的输出路径在同一个目录下
@@ -273,43 +266,43 @@ sh eval_pretrain_RL_FourAction_fnet.sh
 
 ### 1.EVALUATE A PRE-TRAINED RL AGENT on the new test traces and log the results
 
-- [evaluate_RL_offload_utils.py](../simulate_RL\rl_trainer\evaluate_RL_offload_utils.py)
+- [evaluate_RL_offload_utils.py](../simulate_RL/rl_trainer/evaluate_RL_offload_utils.py)
 
 ```sh
 python evaluate_RL_offload_utils.py
 ```
 
-- 结果保存到[RL_results_df.csv](../backup_key_results\RL_results_df.csv)
+- 结果保存到[RL_results_df.csv](../backup_key_results/RL_results_df.csv)
 
 ### 2.run the baselines
 
-- [FourAction_policy_rollouts.py](../simulate_RL\FaceNet_four_action_simulator\FourAction_policy_rollouts.py)
+- [FourAction_policy_rollouts.py](../simulate_RL/FaceNet_four_action_simulator/FourAction_policy_rollouts.py)
 
 ```sh
 python FourAction_policy_rollouts.py
 ```
 
-- 结果保存到[FourAction_FaceNet_baseline_data_facenet_4action](../backup_key_results\FourAction_FaceNet_baseline_data_facenet_4action)
+- 结果保存到[FourAction_FaceNet_baseline_data_facenet_4action](../backup_key_results/FourAction_FaceNet_baseline_data_facenet_4action)
 
 ### 3.plot a boxplot of all different controllers
 
-- [pubQuality_boxplot_FourAction_env.py](../simulate_RL\FaceNet_four_action_simulator\pubQuality_boxplot_FourAction_env.py)
+- [pubQuality_boxplot_FourAction_env.py](../simulate_RL/FaceNet_four_action_simulator/pubQuality_boxplot_FourAction_env.py)
 
 ```sh
 python pubQuality_boxplot_FourAction_env.py
 ```
 
-- 结果保存到[boxplot_facenet_4action](../backup_key_results\boxplot_facenet_4action)
+- 结果保存到[boxplot_facenet_4action](../backup_key_results/boxplot_facenet_4action)
 
 ### 4.plot a pareto optimal covariance plot shown in paper
 
-- [loss_cost_pareto_plot_ellipsoid.py](../simulate_RL\FaceNet_four_action_simulator\loss_cost_pareto_plot_ellipsoid.py)
+- [loss_cost_pareto_plot_ellipsoid.py](../simulate_RL/FaceNet_four_action_simulator/loss_cost_pareto_plot_ellipsoid.py)
 
 ```sh
 python loss_cost_pareto_plot_ellipsoid.py
 ```
 
-- 结果保存到[ELLIPSE_facenet_4action](../backup_key_results\ELLIPSE_facenet_4action)
+- 结果保存到[ELLIPSE_facenet_4action](../backup_key_results/ELLIPSE_facenet_4action)
 
 ------------------------------------------------
 
@@ -338,7 +331,7 @@ TEST_SEEDS="10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,2
 
 - 路径字符串中不能出现'//'
 - 删除 recreate_submission_plot_RL_agent_pretrained.sh中多余的'/'
-- 修改[textfile_utils.py](..\utils\textfile_utils.py)中的remove_and_create_dir(path)函数
+- 修改[textfile_utils.py](../utils/textfile_utils.py)中的remove_and_create_dir(path)函数
 
 ## 坐标修改(Heuristic Oracle)
 
@@ -618,7 +611,7 @@ attempting to delete  E:\VSCode\Python\cloud_robotics\backup_key_results\boxplot
 处理: -p 时出错。
 ```
 
-- 解决方法，修改[textfile_utils.py](..\utils\textfile_utils.py)
+- 解决方法，修改[textfile_utils.py](../utils/textfile_utils.py)
 
 ```py
 def remove_and_create_dir(path):
@@ -680,13 +673,13 @@ MatplotlibDeprecationWarning: Support for setting the 'text.latex.preamble' or '
   plt.rcParams['text.latex.preamble'] = [r'\boldmath']
 ```
 
-- <font color=#90900 >除数为0->[pubQuality_boxplot_FourAction_env.py第87行](..\simulate_RL\FaceNet_four_action_simulator\pubQuality_boxplot_FourAction_env.py)(**未解决**)</FONT>
+- <font color=#90900 >除数为0->[pubQuality_boxplot_FourAction_env.py第87行](../simulate_RL/FaceNet_four_action_simulator/pubQuality_boxplot_FourAction_env.py)(**未解决**)</font>
 
 ```sh
 RuntimeWarning: divide by zero encountered in double_scalars
 ```
 
-- <font color=#90900 >找不到标签->[plotting_utils.py](..\utils\plotting_utils.py)(**未解决**)</FONT>
+- <font color=#90900 >找不到标签->[plotting_utils.py](../utils/plotting_utils.py)(**未解决**)</font>
 
 ```sh
 No handles with labels found to put in legend
